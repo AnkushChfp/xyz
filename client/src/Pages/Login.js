@@ -25,32 +25,24 @@ function Login() {
         console.log(result);
      
       }
-     
-    return (
-      <>
- 
-     
-   <div className="loginContainer">
-       </div>
-       <div style={{height:"424px",backgroundColor:"#EDF6FF"}}>
-      </div>
-      <div className="card">
-        <h1>Login</h1>
-       <form action="/login" method="POST">
-       <label for="email" >Email address</label>
-        <input id="email" placeholder="Enter your email" type="email" onChange={(e) => setEmail(e.target.value)}/>
-        <label for="password" >Password</label>
-        <input id="password" placeholder="Enter your password" type="password" onChange={(e) => setPassword(e.target.value)}/>
-        <button type="submit" onSubmit={PostData}>Login</button>
-       </form>
+    return ( 
+    <div>
+      <div className="loginContainer">
+          </div>
+          <div style={{height:"424px",backgroundColor:"#EDF6FF"}}>
+          </div>
+          <div className="card">
+            <h1>Login</h1>
+          <form action="/login" method="POST">
+          <label for="email" >Email address</label>
+            <input id="email" placeholder="Enter your email" type="email" onChange={(e) => setEmail(e.target.value)}/>
+            <label for="password" >Password</label>
+            <input id="password" placeholder="Enter your password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+            <button type="submit" onSubmit={PostData}>Login</button>
+          </form>
 
       </div>
-   
-  
-      
-     
-     
-      </>
+    </div>
     );
   }
   
