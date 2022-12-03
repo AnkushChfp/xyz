@@ -7,22 +7,18 @@ return(
           </div>
           <div style={{height:"424px",backgroundColor:"#EDF6FF"}}>
           </div>
+          <div className="cardcontainer">
           <div className="card1">
-          <div>
-            1
-          </div>
-          <div>
-         2
-          </div>
+        <div className="card2">  <OutlinedCard/></div>
+        <div className="card2">  <OutlinedCard/></div>
+        <div className="card2">  <OutlinedCard/></div>
+        <div className="card2">  <OutlinedCard/></div>
        
-          <div>
-         3
+          
           </div>
-       
-          <div>
-        4
+         
           </div>
-      </div>
+         
 
 
 </>
