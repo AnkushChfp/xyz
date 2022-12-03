@@ -1,7 +1,10 @@
 import { Formik, Field, Form } from "formik";
+// import { useState,useEffect} from "react";
+import { useHistory } from "react-router-dom";
 import React from 'react';
 import "./login.css";
 function Login() {
+  let history = useHistory();
   async function PostData(event) {
     console.log(event)
       // debugger;
@@ -20,8 +23,10 @@ function Login() {
           }
         );
         result = await result.json();
-        console.log(result);
-     
+        localStorage.setItem("token",result.data["token"]);
+        // setToken(result.data["token"]);
+        history.push("/job-dashboard");
+        
       }
     return ( 
     <div>
