@@ -1,16 +1,10 @@
-import { useEffect, useState } from "react";
+import { Formik, Field, Form } from "formik";
 import React from 'react';
 import "./login.css";
 function Login() {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    console.log(email);
-    async function PostData(event) {
-        event.preventDefault();
-         console.log(email, password);
-        
-        let item = { email, password };
-        console.log(item);
+  async function PostData(event) {
+    console.log(event)
+      // debugger;
         let result = await fetch(
           "https://jobs-api.squareboat.info/api/v1/auth/login",
           {
@@ -19,8 +13,8 @@ function Login() {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              "email": email,
-              "password": password
+              "email": event["email"],
+              "password": event["password"]
             }),
           }
         );
@@ -36,14 +30,18 @@ function Login() {
           </div>
           <div className="card">
             <h1>Login</h1>
-          <form action="/login" method="POST">
-          <label  >Email address</label>
-            <input id="email" placeholder="Enter your email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <label >Password</label>
-            <input id="password" placeholder="Enter your password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-
-            <button type="submit" onSubmit={PostData}>Login</button>
-          </form>
+            <Formik
+                initialValues={{ name: "", email: "" }}
+                onSubmit={ (values) => {
+                  PostData(values)
+                }}
+              >
+                <Form>
+                  <Field name="email" type="email" />
+                  <Field name="password" type="password" />
+                  <button type="submit">Submit</button>
+                </Form>
+            </Formik>
 
       </div>
     </div>
