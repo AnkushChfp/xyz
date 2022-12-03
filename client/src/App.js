@@ -6,22 +6,14 @@ import {BrowserRouter,Route, Switch} from 'react-router-dom'
 import "./App.css";
 
 function App() {
-  return (
-    <>
-    
+  return ( 
     <BrowserRouter>
     <Header/>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/login" component={Login}/>
       </Switch>
     </BrowserRouter>
-    
-    </>
   );
 }
 
