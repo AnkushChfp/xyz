@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
 import React from 'react';
 import "./header.css";
 import Logo from "./myJobs.svg";
+import { useHistory } from "react-router-dom";
 function Header() {
+   let history = useHistory();
     return (
       <>
    <div className="headerContainer">
@@ -11,10 +12,8 @@ function Header() {
     </div>
     
     <div className="buttonlogin">
-       <Link to="/login" style={{color:"white",fontSize:"19px",textDecoration:"none"}} >Login</Link>
-
+      <button onClick={() =>{history.push( "/login")}} >LOGIN</button>
     </div>
-
    </div>
        
       </>
