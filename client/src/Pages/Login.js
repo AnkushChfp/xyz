@@ -10,15 +10,18 @@ function Login() {
          console.log(email, password);
         
         let item = { email, password };
+        console.log(item);
         let result = await fetch(
           "https://jobs-api.squareboat.info/api/v1/auth/login",
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify(item),
+            body: JSON.stringify({
+              "email": email,
+              "password": password
+            }),
           }
         );
         result = await result.json();
@@ -34,10 +37,11 @@ function Login() {
           <div className="card">
             <h1>Login</h1>
           <form action="/login" method="POST">
-          <label for="email" >Email address</label>
-            <input id="email" placeholder="Enter your email" type="email" onChange={(e) => setEmail(e.target.value)}/>
-            <label for="password" >Password</label>
-            <input id="password" placeholder="Enter your password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+          <label  >Email address</label>
+            <input id="email" placeholder="Enter your email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <label >Password</label>
+            <input id="password" placeholder="Enter your password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+
             <button type="submit" onSubmit={PostData}>Login</button>
           </form>
 
