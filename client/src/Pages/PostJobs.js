@@ -1,9 +1,21 @@
 import {useState,useEffect} from "react";
 import "./login.css"
+import ReactPaginate from "react-paginate";
 function PostJobs (){
+        const [currentsetJobData, setCurrentJobData] = useState(null);
+        const [page, setPage] = useState(1);
+        const [pageCount, setPageCount] = useState(0);
+        const [jobDataOffset, setJobDataOffset] = useState(0);
         const [jobData, setJobData] = useState(false)
+
+              const handlePageClick = (event) => {
+                const newOffset = (event.selected * 8) % jobData.length;
+                setJobDataOffset(newOffset);
+              };
+
         const fetchData = async() => {
         const token = localStorage.getItem("token")
+        
         let result = await fetch(
                 "https://jobs-api.squareboat.info/api/v1/recruiters/jobs",
                 {
@@ -21,6 +33,14 @@ function PostJobs (){
         useEffect(() =>{
         fetchData();
 },[])
+useEffect(() => {
+        if(jobData){
+                const endOffset = jobDataOffset + 8;
+                setCurrentJobData(jobData.slice(jobDataOffset, endOffset));
+                setPageCount(Math.ceil(jobData.length / 8));
+        }
+      }, [jobData, jobDataOffset]);
+
 
 return(
 <>
@@ -46,20 +66,39 @@ return(
                                     )
                         })
                 }
-                {/* {jobData &&
-                        jobData.map((v,k)=>{
-                                return(
-                                        <div style={{display:"flex",flexDirection:"row"}}>
-                                                <OutlinedCard data = {v}/>
-                                        </div>
-                
-                                    )
-                        })
-                } */}
-                        {/* <OutlinedCard data = {jobData[0]}/>
-                        <OutlinedCard data = {jobData[0]}/>
-                        <OutlinedCard data = {jobData[0]}/>
-                        <OutlinedCard data = {jobData[0]}/> */}
+                <div className="pagination">
+                        <button
+                                disabled={page === 1}
+                                onClick={() => setPage((prevState) => prevState - 1)}
+                        >
+                                <span> prev </span>
+                        </button>
+                        <p>{page}</p>
+                        <button onClick={() => setPage((prevState) => prevState + 1)}>
+                                Next
+                        </button>
+                </div>
+                <div className="pagination">
+                <ReactPaginate
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="<"
+                renderOnZeroPageCount={null}
+                breakClassName={"page-item"}
+                breakLinkClassName={"page-link"}
+                containerClassName={"pagination"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousClassName={"page-item"}
+                previousLinkClassName={"page-link"}
+                nextClassName={"page-item"}
+                nextLinkClassName={"page-link"}
+                activeClassName={"active"}
+                />
+                </div>
                 </div>
                 </div>
                 </div> 
