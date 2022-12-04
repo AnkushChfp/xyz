@@ -23,8 +23,7 @@ function Login() {
         );
         result = await result.json();
         localStorage.setItem("token",result.data["token"]);
-        // setToken(result.data["token"]);
-        history.push("/job-dashboard");
+        history.push("/postedjob");
         
       }
     return ( 
